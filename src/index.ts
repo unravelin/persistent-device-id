@@ -1,4 +1,4 @@
-import { Core, type CoreConfig } from '../core';
+import { Core, type CoreConfig } from './core';
 
 export default class PersistentDeviceId {
   public core: Core;

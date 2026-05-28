@@ -5,25 +5,21 @@ import replace from '@rollup/plugin-replace';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import { mkdirSync } from 'fs';
-import { globSync } from 'glob';
-import path from 'path';
 import { dts } from 'rollup-plugin-dts';
 import generatePackageJson from 'rollup-plugin-generate-package-json';
 import license from 'rollup-plugin-license';
 import packageJson from './package.json' with { type: 'json' };
 
-const output = {
+const entry = 'src/index.ts';
+
+const umdOutput = {
   name: 'PersistentDeviceId',
   esModule: false,
-  // Prevent Object.freeze being used for namespace references.
-  // https://www.rollupjs.org/guide/en/#outputfreeze.
   freeze: false,
-  // Prevent Object.defineProperty being used for dynamic exports.
-  // https://www.rollupjs.org/guide/en/#outputexternallivebindings.
   externalLiveBindings: false,
 };
 
-const plugins = [
+const basePlugins = [
   resolve(),
   commonjs({ extensions: ['.js', '.ts'] }),
   replace({
@@ -31,127 +27,77 @@ const plugins = [
     PERSISTENT_DEVICE_ID_VERSION: JSON.stringify(packageJson.version + '-persistent-device-id'),
   }),
   license({
-    banner: `/*! <%= pkg.name %> <%= pkg.version %> - https://github.com/unravelin/ravelinjs. Copyright <%= moment().format('YYYY') %> */`,
+    banner: `/*! <%= pkg.name %> <%= pkg.version %> - https://github.com/unravelin/persistent-device-id. Copyright <%= moment().format('YYYY') %> */`,
   }),
 ];
 
-function withTsPlugin(tsConfig) {
-  const draft = plugins.slice();
-  // Insert typescript plugin after resolve and commonjs
-  draft.splice(1, 0, typescript(tsConfig));
-  return draft;
+function withTypeScript(compilerOptions) {
+  const plugins = basePlugins.slice();
+  plugins.splice(1, 0, typescript({ compilerOptions: { noCheck: true, ...compilerOptions } }));
+  return plugins;
 }
 
-const bundles = globSync('src/bundle/*.ts').sort((a, b) => b.length - a.length);
-
-const builds = bundles
-  .map(bundle => {
-    const fileName = path.parse(bundle).name;
-
-    return [
+export default [
+  {
+    input: entry,
+    plugins: withTypeScript({ outDir: 'build' }),
+    output: [
+      { file: 'build/persistent-device-id.js', format: 'iife', ...umdOutput },
       {
-        // IIFE build for browser usage via <script> tag, no external dependencies.
-        // Outputs both normal and minified versions.
-        input: bundle,
-        plugins: withTsPlugin({ compilerOptions: { noCheck: true, outDir: 'build' } }),
-        output: [
-          {
-            file: `build/ravelin-${fileName}.js`,
-            format: 'iife',
-            ...output,
-          },
-          {
-            file: `build/ravelin-${fileName}.min.js`,
-            format: 'iife',
-            ...output,
-            plugins: [terser()],
-          },
-        ],
+        file: 'build/persistent-device-id.min.js',
+        format: 'iife',
+        ...umdOutput,
+        plugins: [terser()],
       },
-      {
-        // UMD build for Node and bundlers, with external dependencies.
-        input: bundle,
-        external: ['detectincognitojs'],
-        output: {
-          file: `dist/${fileName}.js`,
-          format: 'umd',
-          exports: 'default',
-          globals: {
-            detectincognitojs: 'detectIncognito',
-          },
-          ...output,
-        },
-        plugins: withTsPlugin({
-          compilerOptions: {
-            noCheck: true,
-            outDir: 'dist',
-            declaration: true,
-            declarationDir: 'dist/types',
-          },
-        }),
-      },
-      {
-        /* TypeScript declaration files for the UMD build.
-         * These are built into the `dist/types` folder by the UMD build step
-         * and the dts plugin merges them into a single file per RavelinJS module.
-         * The `dist/types` folder is then deleted by the build script. */
-        input: `dist/types/bundle/${fileName}.d.ts`,
-        output: { file: `dist/${fileName}.d.ts`, format: 'es' },
-        plugins: [dts()],
-      },
-    ];
-  })
-  .flat();
-
-/* Generate clean package.json with `exports` field for
- * each RavelinJS module. For example:
- *   exports: {
- *     './core': {
- *       types: './core.d.ts',
- *       default: './core.js',
- *     },
- *     './core+track': {
- *       types: './core+track.d.ts',
- *       default: './core+track.js',
- *     },
- *   }
- */
-const exportsConfig = bundles.reduce((acc, bundle) => {
-  const fileName = path.parse(bundle).name;
-  acc[`./${fileName}`] = {
-    types: `./${fileName}.d.ts`,
-    default: `./${fileName}.js`,
-  };
-  return acc;
-}, {});
-
-builds.push({
-  input: 'package.json',
-  output: { dir: 'dist' },
-  plugins: [
-    {
-      name: 'ensure-dist',
-      buildStart() {
-        mkdirSync('dist', { recursive: true });
-      },
-    },
-    json(),
-    generatePackageJson({
-      outputFolder: 'dist',
-      baseContents: pkg => ({
-        name: pkg.name,
-        version: pkg.version,
-        license: pkg.license,
-        ...(pkg.description && { description: pkg.description }),
-        homepage: pkg.homepage,
-        bugs: pkg.bugs,
-        repository: pkg.repository,
-        ...(pkg.dependencies && { dependencies: pkg.dependencies }),
-        exports: exportsConfig,
-        engines: pkg.engines,
-      }),
+    ],
+  },
+  {
+    input: entry,
+    plugins: withTypeScript({
+      outDir: 'dist',
+      declaration: true,
+      declarationDir: 'dist/types',
     }),
-  ],
-});
-
-export default builds;
+    output: { file: 'dist/index.js', format: 'umd', exports: 'default', ...umdOutput },
+  },
+  {
+    input: 'dist/types/index.d.ts',
+    output: { file: 'dist/index.d.ts', format: 'es' },
+    plugins: [dts()],
+  },
+  {
+    input: 'package.json',
+    output: { dir: 'dist' },
+    plugins: [
+      {
+        name: 'ensure-dist',
+        buildStart() {
+          mkdirSync('dist', { recursive: true });
+        },
+      },
+      json(),
+      generatePackageJson({
+        outputFolder: 'dist',
+        baseContents: pkg => ({
+          name: pkg.name,
+          version: pkg.version,
+          license: pkg.license,
+          ...(pkg.description && { description: pkg.description }),
+          homepage: pkg.homepage,
+          bugs: pkg.bugs,
+          repository: pkg.repository,
+          ...(pkg.dependencies && { dependencies: pkg.dependencies }),
+          main: 'index.js',
+          types: 'index.d.ts',
+          exports: {
+            '.': {
+              types: './index.d.ts',
+              default: './index.js',
+            },
+          },
+          engines: pkg.engines,
+        }),
+      }),
+    ],
+  },
+];

@@ -19,7 +19,6 @@
     "dist",
     "releases",
     "test-unit",
-    "test-integration",
     "node_modules"
   ]
 }
