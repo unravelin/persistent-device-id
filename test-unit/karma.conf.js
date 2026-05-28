@@ -20,8 +20,7 @@ module.exports = function (config) {
     files: [
       '../node_modules/jquery/dist/jquery.js',
       '../node_modules/xhook/dist/xhook.js',
-      'ravelin.js',
-      'utils.js',
+      '../build/persistent-device-id.js',
       '**/*.spec.js',
     ],
 

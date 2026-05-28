@@ -110,7 +110,7 @@ export class Core {
         let d = this.cookies.get(this.cookie);
         let s = this.cookies.get(this.sessionCookie);
 
-        if (!d && s) {
+        if (s) {
           // Restore d from s.
           const sep = s.indexOf(':');
           if (sep !== -1) {
