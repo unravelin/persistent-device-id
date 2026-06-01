@@ -20,21 +20,11 @@ export default defineConfig([
       sourceType: 'module',
     },
     plugins: { js, '@typescript-eslint': ts.plugin },
-    extends: [
-      'js/recommended',
-      '@typescript-eslint/recommended',
-      // TODO: enable later?
-      // '@typescript-eslint/recommended-type-checked',
-    ],
+    extends: ['js/recommended', '@typescript-eslint/recommended'],
     rules: {
       '@typescript-eslint/explicit-member-accessibility': 'error',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': 'off', // Handled by 'noUnusedLocals' in TS config
-      // '@typescript-eslint/no-unsafe-function-type': 'off',
-      // '@typescript-eslint/no-unsafe-assignment': 'off',
-      // '@typescript-eslint/no-unsafe-call': 'off',
-      // '@typescript-eslint/no-unsafe-member-access': 'off',
-      // '@typescript-eslint/no-unsafe-return': 'off',
     },
   },
   // Browser scripts
