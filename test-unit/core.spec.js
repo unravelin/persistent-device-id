@@ -186,13 +186,13 @@ describe('persistent-device-id.core', function () {
     it('sets the persistentDeviceId and persistentSessionId cookies by default', function () {
       const r = new PersistentDeviceId({});
       return r.core.ids().then(function (ids) {
-        expect(document.cookie).to.match(new RegExp('\\bravelinDeviceId=' + ids.device + '\\b'));
-        expect(r.core.cookies.get('ravelinDeviceId')).to.equal(ids.device);
+        expect(document.cookie).to.match(new RegExp('\\bpersistentDeviceId=' + ids.device + '\\b'));
+        expect(r.core.cookies.get('persistentDeviceId')).to.equal(ids.device);
 
         expect(document.cookie).to.match(
-          new RegExp('\\bravelinSessionId=' + ids.device + ':' + ids.session + '\\b')
+          new RegExp('\\bpersistentSessionId=' + ids.device + ':' + ids.session + '\\b')
         );
-        expect(r.core.cookies.get('ravelinSessionId')).to.equal(ids.device + ':' + ids.session);
+        expect(r.core.cookies.get('persistentSessionId')).to.equal(ids.device + ':' + ids.session);
       });
     });
 
@@ -270,13 +270,13 @@ describe('persistent-device-id.core', function () {
 
 /**
  * isolate returns the cfg instance with a few isolating test defaults added.
- * The ns option is for isolate only, and is not passed through to Ravelin. All
- * other properties documented here are the defaults.
+ * The ns option is for isolate only, and is not passed through to PersistentDeviceId.
+ * All other properties documented here are the defaults.
  *
  * @param {object} cfg
  * @param {string} [cfg.ns=testn] A namespace added to the cookie names. Not
  * used by this function.
- * @param {string} [cfg.cookie=ravelinDeviceId-ns]
+ * @param {string} [cfg.cookie=persistentDeviceId-ns]
  * @param {int} [cfg.syncMs=30000]
  * @returns {object} The mutated cfg.
  */
@@ -286,10 +286,10 @@ function isolate(cfg) {
   delete cfg.ns;
 
   if (!('cookie' in cfg)) {
-    cfg.cookie = 'ravelinDeviceId-' + ns;
+    cfg.cookie = 'persistentDeviceId-' + ns;
   }
   if (!('sessionCookie' in cfg)) {
-    cfg.sessionCookie = 'ravelinSessionId-' + ns;
+    cfg.sessionCookie = 'persistentSessionId-' + ns;
   }
   if (!('syncMs' in cfg)) {
     cfg.syncMs = 30000;

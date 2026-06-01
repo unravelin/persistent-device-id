@@ -1,8 +1,3 @@
-/**
- * The core module of RavelinJS provides device-identification, and is used by
- * other modules to communicate with the Ravelin API.
- */
-
 import { CookieJar } from './cookies';
 import { uuid } from './utils';
 
