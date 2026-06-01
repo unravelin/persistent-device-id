@@ -9,16 +9,14 @@ project](https://github.com/unravelin/persistent-device-id).
 ## Table of Contents
 
 - [Quickstart](#quickstart)
-- [Bundles](#bundles)
   - [npm](#npm)
-- [Content-Security-Policy](#content-security-policy)
 - [Script Integrity](#script-integrity)
 - [Browser Compatibility](#browser-compatibility)
 - [Examples](#examples)
   - [deviceId Prefix](#deviceid-prefix)
 - [Reference](#reference)
-  - [`var persistentDeviceId = new PersistentDeviceId({cfg: object})`}](#var-persistent-device-id--new-persistentdeviceidcfg-object)
-  - [`persistentDeviceId.id(): Promise<string>`](#persistentdeviceid-promisestring)
+  - [Constructor](#constructor)
+  - [persistentDeviceId.id()](#persistentdeviceidid)
 
 ## Quickstart
 
@@ -110,7 +108,7 @@ Compatible on recent versions of Chrome, Safari, Firefox, and mobile.
 ### deviceId Prefix
 
 PersistentDeviceId prefixes the deviceId with `pdid-` by default. If you wish to use
-something else, for example if you are [upgrading](#upgrading) from a previous
+something else, for example if you are upgrading from a previous
 version and wish to maintain the opaque string format, simply specify your desired
 prefix or omit entirely:
 
@@ -126,7 +124,7 @@ var persistentDeviceId = new PersistentDeviceId({ prefix: 'myid-' });
 
 ## Reference
 
-### `var persistentDeviceId = new PersistentDeviceId({cfg: object})`
+### Constructor
 
 During your page load you need to instantiate your `PersistentDeviceId` instance:
 
@@ -163,9 +161,9 @@ var rav = new PersistentDeviceId({
 });
 ```
 
-### `persistentDeviceId.id(): Promise<string>`
+### persistentDeviceId.id()
 
-`persistentDeviceId.id` returns [a Promise][Promise] which resolves to the device ID
+`persistentDeviceId.id()` returns a `Promise` which resolves to the device ID
 string. This will eventually match the `persistentDeviceId` cookie.
 
 ```html
@@ -186,3 +184,5 @@ If you are using a modern bundler and transpiler you can declare:
 ```js
 const deviceId = await persistentDeviceId.id();
 ```
+
+[persistentDeviceId.id]: #persistentdeviceidid
