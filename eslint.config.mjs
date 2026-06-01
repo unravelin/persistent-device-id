@@ -39,7 +39,7 @@ export default defineConfig([
   },
   // Browser scripts
   {
-    files: ['test-integration/**/*.js', 'test-unit/**/*.js'],
+    files: ['test-unit/**/*.js'],
     languageOptions: {
       globals: globals.browser,
       sourceType: 'script',
@@ -62,7 +62,6 @@ export default defineConfig([
     files: ['test-*/**/*.{js,mjs}'],
     languageOptions: {
       globals: {
-        $: 'readonly',
         after: 'readonly',
         afterEach: 'readonly',
         before: 'readonly',
@@ -72,7 +71,6 @@ export default defineConfig([
         it: 'readonly',
         module: 'readonly',
         PersistentDeviceId: 'readonly',
-        xhook: 'readonly',
       },
     },
   },

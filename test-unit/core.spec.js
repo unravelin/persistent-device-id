@@ -1,7 +1,5 @@
 describe('persistent-device-id.core', function () {
   beforeEach(function () {
-    xhook.destroy();
-
     // Delete all cookies. The tests should be fully isolated anyway, but this
     // makes the error output cleaner.
     const cookies = document.cookie.split(';');

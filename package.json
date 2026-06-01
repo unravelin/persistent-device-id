@@ -30,13 +30,9 @@
     "ts:check": "tsc --noEmit --skipLibCheck",
     "version": "run-s clean build dist release # (note: auto-executed by np)"
   },
-  "lint-staged": {
-    "*.{ts,js,mjs}": "prettier --write --experimental-cli"
-  },
   "devDependencies": {
     "@eslint/js": "9.39.2",
     "@ianvs/prettier-plugin-sort-imports": "4.7.0",
-    "@ngrok/ngrok": "1.7.0",
     "@rollup/plugin-commonjs": "29.0.0",
     "@rollup/plugin-json": "6.1.0",
     "@rollup/plugin-node-resolve": "16.0.3",
@@ -44,35 +40,23 @@
     "@rollup/plugin-terser": "0.4.4",
     "@rollup/plugin-typescript": "12.3.0",
     "chai": "4.5.0",
-    "chai-subset": "1.6.0",
-    "cors": "2.8.5",
-    "dotenv": "17.2.3",
     "eslint": "9.39.2",
     "eslint-formatter-codeframe": "7.32.2",
-    "express": "4.22.1",
-    "glob": "13.0.0",
     "globals": "17.0.0",
-    "jquery": "3.7.1",
     "karma": "6.4.4",
     "karma-chai": "0.1.0",
     "karma-chrome-launcher": "3.2.0",
     "karma-mocha": "2.0.1",
-    "lint-staged": "16.2.7",
-    "mingo": "6.3.4",
     "mocha": "11.7.1",
     "npm-run-all": "4.1.5",
-    "on-finished": "2.4.1",
     "prettier": "3.8.0",
     "replace-in-file": "8.4.0",
     "rollup": "4.57.0",
     "rollup-plugin-dts": "6.3.0",
     "rollup-plugin-generate-package-json": "3.2.0",
     "rollup-plugin-license": "3.6.0",
-    "selenium-webdriver": "4.39.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.53.1",
-    "xhook": "1.6.0",
-    "yaml": "2.8.0"
+    "typescript-eslint": "8.53.1"
   },
   "mocha": {
     "timeout": 10000

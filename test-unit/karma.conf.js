@@ -17,12 +17,7 @@ module.exports = function (config) {
     frameworks: ['mocha', 'chai'],
 
     // list of files / patterns to load in the browser
-    files: [
-      '../node_modules/jquery/dist/jquery.js',
-      '../node_modules/xhook/dist/xhook.js',
-      '../build/persistent-device-id.js',
-      '**/*.spec.js',
-    ],
+    files: ['../build/persistent-device-id.js', '**/*.spec.js'],
 
     // list of files / patterns to exclude
     exclude: [],
