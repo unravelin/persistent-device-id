@@ -4,9 +4,7 @@ persistent-device-id is a JavaScript library that creates an identifier that
 is attached to a user's browser session.
 
 Please feel welcome to create issues or submit pull requests on [the
-project](https://github.com/unravelin/persistent-device-id). The [Contribution
-Guidelines](https://github.com/unravelin/persistent-device-id/blob/main/CONTRIBUTING.md)
-detail how to write and test code for RavelinJS.
+project](https://github.com/unravelin/persistent-device-id).
 
 ## Table of Contents
 
@@ -20,19 +18,14 @@ detail how to write and test code for RavelinJS.
   - [deviceId Prefix](#deviceid-prefix)
   - [API base URL](#api-base-url)
 - [Reference](#reference)
-  - [`var ravelin = new Ravelin({cfg: object})`](#var-ravelin--new-ravelincfg-object)
-  - [`ravelin.core.id(): Promise<string>`](#ravelincoreid-promisestring)
-    - [Device ID Format](#device-id-format)
-  - [`ravelin.encrypt.card(card: object): object`](#ravelinencryptcardcard-object-object)
-  - [`ravelin.track.load()`](#ravelintrackload)
-  - [`ravelin.track.event(name, [props])`](#ravelintrackeventname-props)
-  - [`ravelin.track.paste(event: ClipboardEvent)`](#ravelintrackpasteevent-clipboardevent)
+  - `[var persistentDeviceId = new PersistentDeviceId()](#var-persistent-device-id--new-persistentdeviceidcfg-object)`
+  - `[persistentDeviceId.id(): Promise<string>](#persistentdeviceid-promisestring)`
 
 ## Quickstart
 
 Get a copy of
 [persistent-device-id.min.js on Github releases][releases] and
-instantiate your Ravelin instance on the page:
+instantiate your PersistentDeviceId instance on the page:
 
 ```html
 <script src="persistent-device-id.min.js"></script>
@@ -63,14 +56,14 @@ Read on for more details.
 ### npm
 
 If you have a JavaScript build system and would prefer to include PersistentDeviceId
-using it, you can install [ravelinjs from
-npm](https://www.npmjs.com/package/persistent-device-ud) with:
+using it, you can install [persistent-device-id from
+npm](https://www.npmjs.com/package/persistent-device-id) with:
 
 ```bash
 npm install persistent-device-id@1
 ```
 
-You can then import the desired bundle within the RavelinJS library. For
+You can then import the desired bundle within the PersistentDeviceId library. For
 example, to load the core+track bundle using `require` is:
 
 ```js
@@ -92,7 +85,9 @@ build system, we recommended setting the `integrity` attribute on the script tag
 to the corresponding value from the integrity file of the release. For example,
 if the integrity file reads:
 
-    sha384-8de9e022e2f67e2072bb114e670d2fb37cab8eaf81616bcc3951087aa473e62a8b9fcc4c780a8d8d09df55c8b63bfd7c  persistent-device-id-1.0.0-rc1.js
+```
+sha384-8de9e022e2f67e2072bb114e670d2fb37cab8eaf81616bcc3951087aa473e62a8b9fcc4c780a8d8d09df55c8b63bfd7c  persistent-device-id-1.0.0-rc1.js
+```
 
 then your HTML becomes:
 
@@ -103,7 +98,9 @@ then your HTML becomes:
 If the integrity file is next to the script in question, you can validate the
 contents using:
 
-    sed s/^sha384-// integrity | shasum -c
+```
+sed s/^sha384-// integrity | shasum -c
+```
 
 ## Browser Compatibility
 
