@@ -16,7 +16,6 @@ project](https://github.com/unravelin/persistent-device-id).
 - [Browser Compatibility](#browser-compatibility)
 - [Examples](#examples)
   - [deviceId Prefix](#deviceid-prefix)
-  - [API base URL](#api-base-url)
 - [Reference](#reference)
   - `[var persistentDeviceId = new PersistentDeviceId()](#var-persistent-device-id--new-persistentdeviceidcfg-object)`
   - `[persistentDeviceId.id(): Promise<string>](#persistentdeviceid-promisestring)`
