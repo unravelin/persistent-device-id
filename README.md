@@ -17,7 +17,7 @@ project](https://github.com/unravelin/persistent-device-id).
 - [Examples](#examples)
   - [deviceId Prefix](#deviceid-prefix)
 - [Reference](#reference)
-  - [`var persistentDeviceId = new PersistentDeviceId()`](#var-persistent-device-id--new-persistentdeviceidcfg-object)
+  - [`var persistentDeviceId = new PersistentDeviceId({cfg: object})`}](#var-persistent-device-id--new-persistentdeviceidcfg-object)
   - [`persistentDeviceId.id(): Promise<string>`](#persistentdeviceid-promisestring)
 
 ## Quickstart
