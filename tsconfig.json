@@ -7,18 +7,11 @@
     "lib": ["es2022", "dom"],
     "module": "preserve",
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "strictNullChecks": true,
     "strictBindCallApply": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "noImplicitThis": true
   },
-  "exclude": [
-    "build",
-    "dist",
-    "releases",
-    "test-unit",
-    "node_modules"
-  ]
+  "exclude": ["build", "dist", "releases", "test-unit", "node_modules"]
 }

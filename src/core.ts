@@ -107,27 +107,27 @@ export class Core {
     }
 
     this._ids = this._id.then(() => {
-        let d = this.cookies.get(this.cookie);
-        let s = this.cookies.get(this.sessionCookie);
+      let d = this.cookies.get(this.cookie);
+      let s = this.cookies.get(this.sessionCookie);
 
-        if (s) {
-          // Restore d from s.
-          const sep = s.indexOf(':');
-          if (sep !== -1) {
-            d = s.substring(0, sep);
-          }
-
-          // Strip d: from the beginning of s.
-          if (d && s.startsWith(d + ':')) {
-            s = s.substring(d.length + 1);
-          }
+      if (s) {
+        // Restore d from s.
+        const sep = s.indexOf(':');
+        if (sep !== -1) {
+          d = s.substring(0, sep);
         }
 
-        return {
-          device: d || this.prefix + uuid(),
-          session: s || uuid(),
-        };
-      });
+        // Strip d: from the beginning of s.
+        if (d && s.startsWith(d + ':')) {
+          s = s.substring(d.length + 1);
+        }
+      }
+
+      return {
+        device: d || this.prefix + uuid(),
+        session: s || uuid(),
+      };
+    });
 
     return this._ids;
   }
