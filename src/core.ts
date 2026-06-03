@@ -10,7 +10,7 @@ declare const PERSISTENT_DEVICE_ID_VERSION: string;
 export interface CoreConfig {
   /** The library version. Defaults to the build constant PERSISTENT_DEVICE_ID_VERSION. */
   version?: string;
-  /** A string of the default prefix for the deviceId (default "pdid-"). */
+  /** A string of the default prefix for the deviceId (default "pid-"). */
   prefix?: string;
   /** The name of the cookie that the deviceId is kept in (default "persistentDeviceId"). */
   cookie?: string;
@@ -74,7 +74,7 @@ export class Core {
       sameSite: cfg.cookieSameSite,
     });
 
-    this.prefix = typeof cfg.prefix === 'string' ? cfg.prefix : 'pdid-';
+    this.prefix = typeof cfg.prefix === 'string' ? cfg.prefix : 'pid-';
     this._id = Promise.resolve(undefined);
 
     this.sync();

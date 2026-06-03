@@ -45,7 +45,7 @@ describe('persistent-device-id.core', function () {
         cookies: {},
         cfg: {},
         exp: {
-          device: /pdid-[a-z0-9-]{30,}/,
+          device: /pid-[a-z0-9-]{30,}/,
           session: /[a-z0-9-]{30,}/,
         },
       },
@@ -53,7 +53,7 @@ describe('persistent-device-id.core', function () {
         cookies: { session: 'sess-cook' },
         cfg: {},
         exp: {
-          device: /pdid-[a-z0-9-]{30,}/,
+          device: /pid-[a-z0-9-]{30,}/,
           session: /sess-cook/,
         },
       },
@@ -134,7 +134,7 @@ describe('persistent-device-id.core', function () {
         })
       );
       return r.core.id().then(function (id) {
-        expect(id).to.match(/pdid-[a-z0-9-]{30,}/);
+        expect(id).to.match(/pid-[a-z0-9-]{30,}/);
         expect(r.core.cookies.get('expiredDeviceId')).to.equal(id);
 
         return new Promise(function (resolve) {
@@ -148,7 +148,7 @@ describe('persistent-device-id.core', function () {
     it('returns IDs', function () {
       const r = new PersistentDeviceId(isolate({}));
       return r.core.id().then(function (id) {
-        expect(id).to.match(/pdid-[a-z0-9-]{30,}/);
+        expect(id).to.match(/pid-[a-z0-9-]{30,}/);
       });
     });
 

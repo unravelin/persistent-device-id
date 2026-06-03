@@ -107,7 +107,7 @@ Compatible on recent versions of Chrome, Safari, Firefox, and mobile.
 
 ### deviceId Prefix
 
-PersistentDeviceId prefixes the deviceId with `pdid-` by default. If you wish to use
+PersistentDeviceId prefixes the deviceId with `pid-` by default. If you wish to use
 something else, for example if you are upgrading from a previous
 version and wish to maintain the opaque string format, simply specify your desired
 prefix or omit entirely:
@@ -131,9 +131,9 @@ During your page load you need to instantiate your `PersistentDeviceId` instance
 ```javascript
 var rav = new PersistentDeviceId({
   /**
-   * @prop {string} [prefix=pdid-] The prefix of the generated deviceId.
+   * @prop {string} [prefix=pid-] The prefix of the generated deviceId.
    */
-  // prefix: 'pdid-',
+  // prefix: 'pid-',
   /**
    * @prop {string} [cookie=persistentDeviceId] The cookie that the deviceId is
    * persisted in.
@@ -168,13 +168,13 @@ string. This will eventually match the `persistentDeviceId` cookie.
 
 ```html
 <form action="main">
-  <input type="hidden" name="device-id" id="pdid-device-id" />
+  <input type="hidden" name="device-id" id="pid-device-id" />
 </form>
 <script src="persistent-device-id.min.js">
   <script>
       var persistentDeviceId = new PersistentDeviceId();
       persistentDeviceId.id().then(function(deviceId) {
-          document.getElementById('pdid-device-id').value = deviceId;
+          document.getElementById('pid-device-id').value = deviceId;
       });
 </script>
 ```
