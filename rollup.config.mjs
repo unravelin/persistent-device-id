@@ -4,7 +4,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
-import { mkdirSync } from 'fs';
 import { dts } from 'rollup-plugin-dts';
 import generatePackageJson from 'rollup-plugin-generate-package-json';
 import license from 'rollup-plugin-license';
@@ -53,28 +52,12 @@ export default [
   },
   {
     input: entry,
-    plugins: withTypeScript({
-      outDir: 'dist',
-      declaration: true,
-      declarationDir: 'dist/types',
-    }),
-    output: { file: 'dist/index.js', format: 'umd', exports: 'default', ...umdOutput },
-  },
-  {
-    input: 'dist/types/index.d.ts',
-    output: { file: 'dist/index.d.ts', format: 'es' },
-    plugins: [dts()],
-  },
-  {
-    input: 'package.json',
-    output: { dir: 'dist' },
     plugins: [
-      {
-        name: 'ensure-dist',
-        buildStart() {
-          mkdirSync('dist', { recursive: true });
-        },
-      },
+      ...withTypeScript({
+        outDir: 'dist',
+        declaration: true,
+        declarationDir: 'dist/types',
+      }),
       json(),
       generatePackageJson({
         outputFolder: 'dist',
@@ -82,11 +65,11 @@ export default [
           name: pkg.name,
           version: pkg.version,
           license: pkg.license,
-          ...(pkg.description && { description: pkg.description }),
+          description: pkg.description,
           homepage: pkg.homepage,
           bugs: pkg.bugs,
           repository: pkg.repository,
-          ...(pkg.dependencies && { dependencies: pkg.dependencies }),
+          dependencies: pkg.dependencies,
           main: 'index.js',
           types: 'index.d.ts',
           exports: {
@@ -99,5 +82,11 @@ export default [
         }),
       }),
     ],
+    output: { dir: 'dist', format: 'umd', exports: 'default', ...umdOutput },
+  },
+  {
+    input: 'dist/types/index.d.ts',
+    output: { file: 'dist/index.d.ts', format: 'es' },
+    plugins: [dts()],
   },
 ];

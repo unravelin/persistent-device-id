@@ -11,3 +11,6 @@ certs/
 build/
 dist/
 releases/
+
+.DS_Store
+.env

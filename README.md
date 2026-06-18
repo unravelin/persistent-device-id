@@ -27,7 +27,7 @@ instantiate your PersistentDeviceId instance on the page:
 ```html
 <script src="persistent-device-id.min.js"></script>
 <script>
-  var persistentDeviceId = new PersistentDeviceId();
+  const persistentDeviceId = new PersistentDeviceId();
 </script>
 ```
 
@@ -64,7 +64,7 @@ You can then import the desired bundle within the PersistentDeviceId library. Fo
 example, to load the core+track bundle using `require` is:
 
 ```js
-var PersistentDeviceId = require('persistentDeviceId');
+const PersistentDeviceId = require('persistentDeviceId');
 ```
 
 Or to load with ES6 imports is:
@@ -113,13 +113,13 @@ version and wish to maintain the opaque string format, simply specify your desir
 prefix or omit entirely:
 
 ```js
-var persistentDeviceId = new PersistentDeviceId({ prefix: '' });
+const persistentDeviceId = new PersistentDeviceId({ prefix: '' });
 ```
 
 or
 
 ```js
-var persistentDeviceId = new PersistentDeviceId({ prefix: 'myid-' });
+const persistentDeviceId = new PersistentDeviceId({ prefix: 'myid-' });
 ```
 
 ## Reference
@@ -129,7 +129,7 @@ var persistentDeviceId = new PersistentDeviceId({ prefix: 'myid-' });
 During your page load you need to instantiate your `PersistentDeviceId` instance:
 
 ```javascript
-var rav = new PersistentDeviceId({
+const id = new PersistentDeviceId({
   /**
    * @prop {string} [prefix=pid-] The prefix of the generated deviceId.
    */
@@ -172,7 +172,7 @@ string. This will eventually match the `persistentDeviceId` cookie.
 </form>
 <script src="persistent-device-id.min.js">
   <script>
-      var persistentDeviceId = new PersistentDeviceId();
+      const persistentDeviceId = new PersistentDeviceId();
       persistentDeviceId.id().then(function(deviceId) {
           document.getElementById('pid-device-id').value = deviceId;
       });
