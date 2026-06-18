@@ -1,4 +1,4 @@
-# Persistent Device Id
+# Persistent Device ID
 
 persistent-device-id is a JavaScript library that creates an identifier that
 is attached to a user's browser session.
@@ -60,14 +60,13 @@ npm](https://www.npmjs.com/package/persistent-device-id) with:
 npm install persistent-device-id@1
 ```
 
-You can then import the desired bundle within the PersistentDeviceId library. For
-example, to load the core+track bundle using `require` is:
+You can then import the bundle into your project. For example, using require:
 
 ```js
-const PersistentDeviceId = require('persistentDeviceId');
+const PersistentDeviceId = require('persistent-device-id');
 ```
 
-Or to load with ES6 imports is:
+Or using ES6 imports:
 
 ```js
 import PersistentDeviceId from 'persistent-device-id';
