@@ -37,6 +37,7 @@ function withTypeScript(compilerOptions) {
 }
 
 export default [
+  // Browser bundles: full and minified scripts.
   {
     input: entry,
     plugins: withTypeScript({ outDir: 'build' }),
@@ -50,6 +51,7 @@ export default [
       },
     ],
   },
+  // npm package build: build, TypeScript declarations, and package.json.
   {
     input: entry,
     plugins: [
@@ -84,6 +86,7 @@ export default [
     ],
     output: { dir: 'dist', format: 'umd', exports: 'default', ...umdOutput },
   },
+  // Types: Combines all type hint files into one index.d.ts.
   {
     input: 'dist/types/index.d.ts',
     output: { file: 'dist/index.d.ts', format: 'es' },

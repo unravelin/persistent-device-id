@@ -107,10 +107,8 @@ Compatible on recent versions of Chrome, Safari, Firefox, and mobile.
 
 ### deviceId Prefix
 
-PersistentDeviceId prefixes the deviceId with `pid-` by default. If you wish to use
-something else, for example if you are upgrading from a previous
-version and wish to maintain the opaque string format, simply specify your desired
-prefix or omit entirely:
+PersistentDeviceId prefixes the deviceId with `pid-` by default. You can also
+use a custom prefix by specifying your desired prefix or omitting it entirely:
 
 ```js
 const persistentDeviceId = new PersistentDeviceId({ prefix: '' });
