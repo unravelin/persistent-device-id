@@ -1,0 +1,17 @@
+{
+  "include": ["src/**/*"],
+  "compileOnSave": false,
+  "compilerOptions": {
+    "noEmit": true,
+    "target": "es2022",
+    "lib": ["es2022", "dom"],
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "strictNullChecks": true,
+    "strictBindCallApply": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noImplicitThis": true
+  },
+  "exclude": ["build", "dist", "releases", "test-unit", "node_modules"]
+}
