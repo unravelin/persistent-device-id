@@ -1,14 +1,15 @@
 {
   "name": "persistent-device-id",
   "version": "1.0.0",
+  "license": "MIT",
+  "description": "A library for creating a persistent device ID",
+  "author": "Ravelin (https://github.com/unravelin)",
   "main": "persistent-device-id.js",
   "types": "persistent-device-id.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/unravelin/persistent-device-id.git"
   },
-  "author": "Ravelin (https://github.com/unravelin)",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/unravelin/persistent-device-id/issues"
   },
@@ -58,6 +59,7 @@
     "typescript": "5.9.3",
     "typescript-eslint": "8.53.1"
   },
+  "dependencies": {},
   "mocha": {
     "timeout": 10000
   },
