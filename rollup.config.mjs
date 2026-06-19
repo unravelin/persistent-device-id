@@ -68,12 +68,14 @@ export default [
           version: pkg.version,
           license: pkg.license,
           description: pkg.description,
+          author: pkg.author,
           homepage: pkg.homepage,
           bugs: pkg.bugs,
           repository: pkg.repository,
           dependencies: pkg.dependencies,
           main: 'index.js',
           types: 'index.d.ts',
+          files: ['index.js', 'index.d.ts', 'README.md', 'LICENSE'],
           exports: {
             '.': {
               types: './index.d.ts',
