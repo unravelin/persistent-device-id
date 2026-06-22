@@ -38,15 +38,6 @@ export interface IDs {
 }
 
 /**
- * The response from the Core.send method.
- */
-export interface CoreResponse {
-  status: number;
-  text: string;
-  attempt?: number;
-}
-
-/**
  * Core library instance. Provides helpers and device identification.
  */
 export class Core {
