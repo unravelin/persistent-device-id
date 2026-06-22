@@ -25,8 +25,6 @@ export interface CoreConfig {
   cookieExpiryDays?: number;
   /** The sync timeout frequency in milliseconds (default 2000). */
   syncMs?: number;
-  /** The send retry backoff time in milliseconds (default 150). */
-  sendRetryMs?: number;
   /** Whether to initialize the sync step automatically (default true). */
   init?: boolean;
 }
@@ -53,7 +51,6 @@ export interface CoreResponse {
  */
 export class Core {
   public version: string;
-  public sendRetryMs: number;
   public cookie: string;
   public sessionCookie: string;
   public cookieExpiryDays: number;
@@ -65,7 +62,6 @@ export class Core {
 
   public constructor(cfg: CoreConfig) {
     this.version = cfg.version || PERSISTENT_DEVICE_ID_VERSION;
-    this.sendRetryMs = cfg.sendRetryMs || 150;
     this.cookie = cfg.cookie || 'persistentDeviceId';
     this.sessionCookie = cfg.sessionCookie || 'persistentSessionId';
     this.cookieExpiryDays = cfg.cookieExpiryDays ?? 365;
